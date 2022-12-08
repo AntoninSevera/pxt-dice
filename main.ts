@@ -30,45 +30,51 @@
   //  }
   //  whaleysans.showNumber(number)
 //})
-let number1 = 4
+let bornin = control.millis();
+//let number1 = 4
 let previewStateAPressed = input.buttonIsPressed(Button.A);
 let previewStateBPressed = input.buttonIsPressed(Button.B);
 
-let makej2A = () => {
-    number1 -= 1
-    whaleysans.showNumber(number1)
-}
-let makej2B = () => {
-    number1 += 1
-    whaleysans.showNumber(number1)
-}
+//let makej2A = () => {
+    //number1 -= 1
+
+//}
+//let makej2B = () => {
+   // number1 += 1
+ 
+//}
 
 let makej = function() {
     if (input.buttonIsPressed(Button.A)) {
         //let actualStateA = true;
         //if (previewStateAPressed == false && actualStateA == true)
         if (!previewStateAPressed) {
-            number1 -= 1
+            bornin = control.millis();//uložení času stisku
             previewStateAPressed = true;
         } 
     } else {
-        previewStateAPressed = false;
-    }
-
-    if (input.buttonIsPressed(Button.B)) {
-        if (!previewStateBPressed) {
-            number1 += 1
-            previewStateBPressed = true;
+        if(previewStateAPressed) {
+            basic.showNumber(control.millis() - bornin)//rozdíl časů
+            previewStateAPressed = false;
         }
-    } else {
-        previewStateBPressed = false
     }
-    whaleysans.showNumber(number1)
 }
+//     if (input.buttonIsPressed(Button.B)) {
+//         if (!previewStateBPressed) {
+//             bornin = control
+//             previewStateBPressed = true;
+//         }
+//     } else {
+//         if(!previewStateBPressed) {
+//             previewStateBPressed = false
+//         }
 
-input.onButtonPressed(Button.A, makej2A); //registrace k události...
-input.onButtonPressed(Button.B, makej2B); //registrace k události...
+//     }
+// }
 
-//while (true) {
-//    makej()
-//}
+//input.onButtonPressed(Button.A, makej2A); //registrace k události...
+//input.onButtonPressed(Button.B, makej2B); //registrace k události...
+
+while (true) {
+    makej()
+}
